@@ -13,10 +13,10 @@ img_view = None
 
 class ImageFrame(Frame):
     def __init__(self, parent):
-        Frame.__init__(self, parent)
+        Frame.__init__(self, parent) # "super" call
         self.image_view = Label(self, text="IMAGE HERE", image=ImageTk.PhotoImage(Image.open("test_img.jpg")))
         self.image_view.pack(side="left", fill="both", expand=True)
-        self.text = Label(self, text="word goes here").pack(side="left", fill="both", expand=True
+        self.text = Label(self, text="word goes here").pack(side="left", fill="both", expand=True)
         
 def main():
     root = Tk() # root of application
