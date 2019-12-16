@@ -12,8 +12,8 @@ Future functionality could/might include email / GoogleDrive support for the pro
 ## Examples
 PRELIMINARY.
 
-[](idpoc1.png)
-[](idpoc2.png)
-[](idpoc3.png)
+[](/idpoc1.png)
+[](/idpoc2.png)
+[](/idpoc3.png)
 
 
