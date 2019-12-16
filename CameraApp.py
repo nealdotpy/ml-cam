@@ -23,6 +23,9 @@ class ImageFrame(Frame): # "extends" Frame
         parent.geometry("800x400")
 
     def tags(self): # add location based tags for each object in the picture (label)
+        if (self.gvo.num_obj == 0):
+            print("found no objects. sorry :/")
+            return
         for obj in self.gvo.found:
             for k in self.gvo.found[obj]:
                 print(k, self.gvo.found[obj][k]) # testing line
