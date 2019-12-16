@@ -39,6 +39,7 @@ def display_img():
         ImageFrame(top).pack(side=LEFT)
         
 def main():
+    global root
     root = Tk() # root of application
     root.title("PICAMERA by NEALDOTPY")
     CameraFrame(root).pack(fill="both", expand=True)
