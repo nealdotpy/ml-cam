@@ -24,8 +24,10 @@ class ImageFrame(Frame): # "extends" Frame
 
     def tags(self): # add location based tags for each object in the picture (label)
         if (self.gvo.num_obj == 0):
+            label = Label(self, text="NO OBJECTS FOUND.", font=font.Font(family='Helvetica', size=15, weight='bold'))
+            label.place(x=400,y=200)
             print("found no objects. sorry :/")
-            return
+            return # exit
         for obj in self.gvo.found:
             for k in self.gvo.found[obj]:
                 print(k, self.gvo.found[obj][k]) # testing line
