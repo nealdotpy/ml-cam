@@ -1,6 +1,12 @@
 # RASPBERRY-PI MACHINE LEARNING CAMERA
 Raspberry Pi Project that combines hardware and software development into a single project.
 
+## Hardware
+* Raspberry Pi Zero W
+* Adafruit 5" 800x480 TFT Display
+* Adafruit DPI Kippah
+* Raspberry Pi 5 MP Camera Module
+    
 ## Goals
 The goal of the project is to learn how to use Machine Learning libraries as well as custom hardware to accomplish very primitive computer vision (without use of OpenCV).
 
