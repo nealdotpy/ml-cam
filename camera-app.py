@@ -11,19 +11,27 @@ from PIL import ImageTk
 
 img_view = None
 
-class ImageFrame(Frame):
-    def __init__(self, parent):
+class ImageFrame(Frame): # "extends" Frame
+    def __init__(self, parent): # 1 param constructor: "parent"
         Frame.__init__(self, parent) # "super" call
-        self.image_view = Label(self, text="IMAGE HERE", image=ImageTk.PhotoImage(Image.open("test_img.jpg")))
-        self.image_view.pack(side="left", fill="both", expand=True)
-        self.text = Label(self, text="word goes here").pack(side="left", fill="both", expand=True)
+        self.img = ImageTk.PhotoImage(Image.open("test_img.jpg"))
+        self.image_view = Label(self)
+        self.image_view.image = self.img
+        self.image_view.configure(image=self.img)
+        self.image_view.pack(side=LEFT)#"left", fill="both", expand=True)
+        parent.geometry("800x400")
+#        self.text = Label(self, text="word goes here").pack(side="left", fill="both", expand=True)
         
 def main():
     root = Tk() # root of application
     root.title("PICAMERA by NEALDOTPY")
-    #root.geometry("750x400")
+#    text = Label(root, text="word goes here").pack(side="left", fill="both", expand=True)
     ImageFrame(root).pack(fill="both", expand=True)
+#    img = ImageTk.PhotoImage(Image.open("test_img.jpg"))
+#    image_view = Label(root, image=img)
+#    image_view.pack(side="left", fill="both", expand=True)
     for i in range(0):
+        print("instantiated a new toplevel.")
         top = Toplevel(root)
         ImageFrame(top).pack(fill="both", expand=True)
     '''
@@ -44,8 +52,6 @@ def main():
         img_view.pack()        
     '''
     root.mainloop()
-    
-        
 
 def googlevision(path):
     """Localize objects in the local image.
