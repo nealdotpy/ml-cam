@@ -10,4 +10,6 @@ This project will be able to compile and run for any similar hardware configurin
 
 Future functionality could/might include email / GoogleDrive support for the project. Currently, plans for this device are for a YouTube video that it would be favorable to discard data.
 
+## Examples
+Coming soon.
 
