@@ -30,11 +30,40 @@ class CameraFrame(Frame): # "extends" Frame
         stop = Button(self, text="EXIT", fg="white", bg="red",
                       font=font.Font(family='Helvetica', size=20, weight='bold'),
                       command=lambda : exit(0)).pack()
-        parent.geometry("800x400")
+        parent.geometry("400x200")
 
+class GVObject(): # GoogleVisionObject
+    def __init__(self, path):
+        self.google_vision(path)
+        
+    def google_vision(self, path):
+        """
+        Localize objects in the local image.
+        Args:
+        path: The path to the local file.
+        """
+        from google.cloud import vision
+        client = vision.ImageAnnotatorClient()
+        with open(path, 'rb') as image_file:
+            content = image_file.read()
+            image = vision.types.Image(content=content)
+            objects = client.object_localization(
+                image=image).localized_object_annotations
+            print('Number of objects found: {}'.format(len(objects)))
+            self.num_obj = len(objects) # num of objects
+            self.found = {}
+            for object_ in objects:
+                print('\n{} (confidence: {})'.format(object_.name, object_.score))
+
+                print('Normalized bounding polygon vertices: ')
+                for vertex in object_.bounding_poly.normalized_vertices:
+                    print(' - ({}, {})'.format(vertex.x, vertex.y))
+                    
+#                found["name"] = {["confidence"] = object_.score}
+                    
 def display_img():
     if (root != None):
-        print("root is not None")
+#        print("root is not None")
         top = Toplevel(root)
         ImageFrame(top).pack(side=LEFT)
         
@@ -49,29 +78,6 @@ def main():
 #        ImageFrame(top).pack(fill="both", expand=True)
     root.mainloop()
 
-def googlevision(path):
-    """Localize objects in the local image.
-
-    Args:
-    path: The path to the local file.
-    """
-    from google.cloud import vision
-    client = vision.ImageAnnotatorClient()
-
-    with open(path, 'rb') as image_file:
-        content = image_file.read()
-    image = vision.types.Image(content=content)
-
-    objects = client.object_localization(
-        image=image).localized_object_annotations
-
-    print('Number of objects found: {}'.format(len(objects)))
-    for object_ in objects:
-        print('\n{} (confidence: {})'.format(object_.name, object_.score))
-        print('Normalized bounding polygon vertices: ')
-        for vertex in object_.bounding_poly.normalized_vertices:
-            print(' - ({}, {})'.format(vertex.x, vertex.y))
-
 def cap_preview():
     cam = PiCamera()
     cam.start_preview()
@@ -84,7 +90,8 @@ def cap_preview():
     cam.stop_preview()
     cam.close()
     display_img()
-#    googlevision("test_img.jpg") # analyze
+    gvo = GVObject("test_img.jpg")
+#    google_vision("test_img.jpg") # analyze
 
 if __name__ == "__main__":
     main()
