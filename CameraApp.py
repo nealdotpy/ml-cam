@@ -12,14 +12,24 @@ from PIL import ImageTk
 root = None # global scope
 
 class ImageFrame(Frame): # "extends" Frame
-    def __init__(self, parent): # 1 param constructor: "parent"
+    def __init__(self, parent, gvo): # 1 param constructor: "parent"
         Frame.__init__(self, parent) # "super" call
+        self.gvo = gvo
         self.img = ImageTk.PhotoImage(Image.open("test_img.jpg"))
         self.image_view = Label(self)
         self.image_view.image = self.img
         self.image_view.configure(image=self.img)
         self.image_view.pack(side=LEFT)
         parent.geometry("800x400")
+
+    def tags(self): # add location based tags for each object in the picture (label)
+        for obj in self.gvo.found:
+            for k in self.gvo.found[obj]:
+                print(k, self.gvo.found[obj][k]) # testing line
+            label = Label(self, text=self.gvo.found[obj]["name"], font=font.Font(family='Helvetica', size=15, weight='bold'))
+            label.place(x=round(800*self.gvo.found[obj]["locx"],0), y=round(400*self.gvo.found[obj]["locy"],0))
+            #label.pack()
+        
 
 class CameraFrame(Frame): # "extends" Frame
     def __init__(self, parent): # 1 param constructor: "parent"
@@ -75,7 +85,7 @@ class GVObject(): # GoogleVisionObject
                     elif (locx > 0 and i % 2 == 0): # grabs vertex three which we want
                         locx -= vertex.x
                         locy -= vertex.y
-                    print(' - ({}, {})'.format(vertex.x, vertex.y))
+#                    print(' - ({}, {})'.format(vertex.x, vertex.y))
                     i += 1
                 self.found[n] = {"name" : object_.name,
                                  "score" : object_.score,
@@ -84,24 +94,28 @@ class GVObject(): # GoogleVisionObject
                 n += 1
 
 def cap_preview():
+    dur = 5
     cam = PiCamera()
     cam.start_preview()
-    for i in range(5):
-        cam.annotate_text = str(5 - i)
+    for i in range(dur):
+        cam.annotate_text = str(dur - i)
         sleep(1)
     cam.annotate_text = ""
     print("captured pic. saved to 'pwd' as 'test_img.jpg'")
     cam.capture("/home/pi/Desktop/pi-proj/test_img.jpg")
     cam.stop_preview()
     cam.close()
-    display_img()
     gvo = GVObject("test_img.jpg")
     gvo.info()
+    display_img(gvo)
 
-def display_img():
+def display_img(gvo):
     if (root != None):
         top = Toplevel(root)
-        ImageFrame(top).pack(side=LEFT)
+        imgFr = ImageFrame(top, gvo)
+        imgFr.tags()
+        imgFr.pack(side=LEFT)
+        
         
 def main():
     global root
