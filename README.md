@@ -1,5 +1,4 @@
 # RASPBERRY-PI MACHINE LEARNING CAMERA
-1;95;0c
 Raspberry Pi Project that combines hardware and software development into a single project.
 
 ## Goals
