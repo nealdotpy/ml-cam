@@ -1,5 +1,6 @@
 # RASPBERRY-PI MACHINE LEARNING CAMERA
-Raspberry Pi Project that combines hardware and software development into a single project.
+Raspberry Pi Project that combines hardware and software development into a single project. 
+Read more: https://medium.com/@ntp0105/i-couldnt-decided-what-camera-to-buy-so-i-made-one-with-a-brain-c3e7a83faa0e
 
 ## Hardware
 * Raspberry Pi Zero W
