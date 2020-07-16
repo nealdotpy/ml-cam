@@ -9,7 +9,7 @@ Read more: https://medium.com/@ntp0105/i-couldnt-decided-what-camera-to-buy-so-i
 * Raspberry Pi 5 MP Camera Module
     
 ## Goals
-The goal of the project is to learn how to use Machine Learning libraries as well as custom hardware to accomplish very primitive computer vision (without use of OpenCV).
+The goal of the project is to learn how to use Machine Learning libraries as well as custom hardware to accomplish very primitive computer vision.
 
 ## Functionality
 This project will be able to compile and run for any similar hardware configuring and depdencies on python3 libraries. The functionality will include a somewhat complex user interface that utilizes various APIs including the Google Vision API in order to "see" or localize objects in a picture taken by a PiCamera.
